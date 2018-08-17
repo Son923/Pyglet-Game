@@ -33,7 +33,6 @@ bird0_sprite.rotation = 0
 bird1.rotation = 0
 bird2.rotation = 0
 
-bird_flock = [[100, 300], [400, 300], [700, 300]]
 
 # Event callbacks
 @window.event
@@ -48,19 +47,13 @@ def on_draw():
 @window.event
 def on_mouse_press(x, y, button, modifier):
     if button == mouse.LEFT:
-        for bird in range(len(bird_flock)):
-            if bird.hit(x, y, int(bird_flock[bird][0]), int(bird_flock[bird][1])) is True:
-                print("True{}".format(str(bird)))
+        bird_flock = [[100, 300], [400, 300], [700, 300]]
+        for chim in range(len(bird_flock)):
+            if bird.hit(x, y, bird_flock[chim][0], bird_flock[chim][1]) is True:
+                return True
             else:
-                print("False{}".format(bird))
-        # if bird.hit(x, y, 400, 300) is True:
-        #     print("True1")
-        # else:
-        #     print("False1")
-        # if bird.hit(x, y, 700, 300) is True:
-        #     print("True2")
-        # else:
-        #     print("False2")
+                return False
+
 
 
 
