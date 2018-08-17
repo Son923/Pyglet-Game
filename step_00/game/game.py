@@ -1,8 +1,9 @@
 import pyglet
 import resources
 import random
-import bird
+from shoot import hit
 from pyglet.window import mouse
+
 
 window = pyglet.window.Window(800, 600)
 # window.push_handlers(pyglet.window.event.WindowEventLogger())
@@ -41,25 +42,30 @@ def on_draw():
     # label.draw()
     gun.draw()
     bird0_sprite.draw()
+    bird0_sprite.delete()
     bird1.draw()
     bird2.draw()
 
+
+@window.event
+def on_mouse_motion(x, y, dx, dy):
+    mouse_pos = x, y
+
+
 @window.event
 def on_mouse_press(x, y, button, modifier):
+    hit_bird = []
     if button == mouse.LEFT:
         bird_flock = [[100, 300], [400, 300], [700, 300]]
         for chim in range(len(bird_flock)):
-            if bird.hit(x, y, bird_flock[chim][0], bird_flock[chim][1]) is True:
-                return True
+            if hit(x, y, 100, 300) is True:
+                bird0_sprite.delete()
             else:
                 return False
 
 
-
-
 def game_loop(_):
     label.text = str(int(label.text) - 1)
-
 
 
 # asteroids = load.asteroids(5)
