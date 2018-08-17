@@ -1,7 +1,7 @@
 import pyglet
 import random
 import resources
-
+monsters_group = []
 
 window = pyglet.window.Window(1200, 900)
 label = pyglet.text.Label("0", font_size=36, y=300, x=400)
@@ -20,13 +20,20 @@ make_background()
 def on_draw():
     window.clear()
     background_sprite.draw()
-    monsters = group_monsters()
-    for monster in monsters:
+    new_monster = group_monsters(100)
+    for monster in new_monster:
+        monsters_group.append(monster)
+    # monsters_group = (group_monsters(2))
+    print(monsters_group)
+    for monster in monsters_group:
         monster.draw()
+# def begin_value():
+
 
 def group_monsters(num_monsters):
     # Make monsteres
     monsters = []
+    # global monsters_group
     global monster_position
     monster_position = []
     for i in range(num_monsters):
@@ -46,9 +53,10 @@ def group_monsters(num_monsters):
         monsters.append(new_monster)
     return monsters
 
+def update(dt):
+    on_draw()
+# pyglet.app.run()
 
-pyglet.app.run()
-
-# if __name__ == "__main__":
-    # pyglet.clock.schedule_interval(update, 1.0/60)
-    # pyglet.app.run()
+if __name__ == "__main__":
+    pyglet.clock.schedule_interval(update, 1.0)
+    pyglet.app.run()
