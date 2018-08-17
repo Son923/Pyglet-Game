@@ -20,16 +20,19 @@ make_background()
 def on_draw():
     window.clear()
     background_sprite.draw()
-    monsters = group_monsters(50)
+    monsters = group_monsters()
     for monster in monsters:
         monster.draw()
 
 def group_monsters(num_monsters):
     # Make monsteres
     monsters = []
+    global monster_position
+    monster_position = []
     for i in range(num_monsters):
         monster_x = random.randint(0, 1200)
         monster_y = random.randint(450, 900)
+        monster_position.append([monster_x, monster_y])
         # Make one monster
         monster = pyglet.resource.image('pipo-enemy007.png')
         monster.width = 200
@@ -44,7 +47,8 @@ def group_monsters(num_monsters):
     return monsters
 
 
-# pyglet.app.run()
-if __name__ == "__main__":
-    pyglet.clock.schedule_interval(update, 1.0/60)
-    pyglet.app.run()
+pyglet.app.run()
+
+# if __name__ == "__main__":
+    # pyglet.clock.schedule_interval(update, 1.0/60)
+    # pyglet.app.run()
