@@ -44,5 +44,7 @@ def group_monsters(num_monsters):
     return monsters
 
 
-# pyglet.clock.schedule(game_loop)
-pyglet.app.run()
+# pyglet.app.run()
+if __name__ == "__main__":
+    pyglet.clock.schedule_interval(update, 1.0/60)
+    pyglet.app.run()
