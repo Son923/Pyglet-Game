@@ -1,3 +1,4 @@
+import resources
 import pyglet
 from random import randint
 
@@ -9,7 +10,7 @@ class PlayerObject:
         self.velx = 0
         self.vely = 0
         if image is not None:
-            image = pyglet.image.load('/tmp/guest-ze4hfy/nson/son/res/sprites/' + image)
+            image = pyglet.resource.image(image)
             self.sprite = pyglet.sprite.Sprite(image, x=self.posx, y=self.posy)
 
 
@@ -18,8 +19,6 @@ class PlayerObject:
 
 
     def update(self, dt):
-        self.sprite.x += randint(-200,200)*dt
-        self.sprite.y += randint(-200,200)*dt
         pos=[0,0]
         pos[0] = self.sprite.x
         pos[1] = self.sprite.y
