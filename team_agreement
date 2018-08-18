@@ -24,12 +24,19 @@ Strength and weakness:
 
 
 Feature: 
+    Enemy chase player
+    Destroy enemy on click
+    Surviving time as score
+    Special method for highscore display
 
 Workload:
-	Son: 	25%
-	Hai: 	25%
-	Ly:	25%
-	Long: 	25%
+	Son: 	30%     
+	Hai: 	30%     
+	Ly:	    20%     
+	Long: 	20%
 
 Strategies:
+    Explan codebase every check-in
+    
+    
 	
