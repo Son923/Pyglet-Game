@@ -12,7 +12,7 @@ class PlayerObject:
         if image is not None:
             image = pyglet.resource.image(image)
             self.sprite = pyglet.sprite.Sprite(image, x=self.posx, y=self.posy)
-
+            
 
     def draw(self):
         self.sprite.draw()
