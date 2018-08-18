@@ -6,9 +6,30 @@ Working hour:
 	Long: 24	actual: 24
 	Ly: 24		actual: 24
 	
+Check-in: Every 3 hours
+
+Strength and weakness: 
+	Son:
+		Strength: Logic, coding, Bugfix, Lead
+		Weakness: 
+	Hai:	
+		Strength: Logic, coding, algorithm
+		Weakness:
+	Ly:
+		Strength: Bang
+		Weakness: Coding
+	Long:
+		Strength: Logic, idea
+		Weakness: Coding
+
+
+Feature: 
+
+Workload:
+	Son: 	25%
+	Hai: 	25%
+	Ly:	25%
+	Long: 	25%
+
+Strategies:
 	
-Check-in: E
-the strengths and weaknesses of each member
-the list of features you wish to implement
-the allocation of the workload
-your strategy so that you all understand the codebase
