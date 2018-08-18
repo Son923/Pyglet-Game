@@ -17,28 +17,35 @@ background.height = 900
 background_sprite = pyglet.sprite.Sprite(img=background, x=0, y=0)
 
 
-player = PlayerObject(800, 800, "Cowboy2_idle with gun_0.png")
+player = PlayerObject(600, 0, "Cowboy2_idle with gun_0.png")
 
-monsters = []
-# global monsters_group
 global monster_position
 monster_position = []
-for i in range(10):
-    cowboy = Cowboy("Cowboy2.png")
-    monsters.append(cowboy)
+
+
+def spawn():
+    monsters = []
+    # global monsters_group
+    for i in range(1):
+        cowboy = Cowboy("Cowboy2.png")
+        monsters.append(cowboy)
+    return monsters
 
 # cowboy = Cowboy("Cowboy2.png")
 # cowboy2 = Cowboy("Cowboy2.png")
 # cowboy3 = Cowboy("Cowboy2.png")
 # witch1 = Witch(100, 20, "sorcerer villain.png")
 
+monsters = []
+
 @window.event
 def on_draw():
     window.clear()
     background_sprite.draw()
-
     player.sprite.draw()
-
+    new = spawn()
+    for i in new:
+        monsters.append(i)
     for i in monsters:
         i.draw()
 
@@ -52,13 +59,13 @@ def on_draw():
 @window.event
 def on_text_motion(motion):
     if motion == pyglet.window.key.MOTION_LEFT:
-        player.sprite.x -= 5
+        player.sprite.x -= 10
     if motion == pyglet.window.key.MOTION_RIGHT:
-        player.sprite.x += 5
+        player.sprite.x += 10
     if motion == pyglet.window.key.MOTION_UP:
-        player.sprite.y += 5
+        player.sprite.y += 10
     if motion == pyglet.window.key.MOTION_DOWN:
-        player.sprite.y -= 5
+        player.sprite.y -= 10
 
 
 def update(dt):
