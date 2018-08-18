@@ -31,6 +31,7 @@ bird3.rotation = 0
 bird1.rotation = 0
 bird2.rotation = 0
 
+
 sprites = []
 sprites.append(bird1)
 sprites.append(bird2)
