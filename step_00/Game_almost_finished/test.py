@@ -12,9 +12,19 @@ window = pyglet.window.Window(width=1200, height=900, caption="Space Invaders", 
 window.set_location(400, 100)
 frame_rate = 1/16
 
+cursor = pyglet.resource.image("oie_transparent.png")
+cursor_sprite = pyglet.sprite.Sprite(img=cursor)
+@window.event
+def on_mouse_motion(x, y, dx, dy):
+    window.set_mouse_visible(False)
+    window.clear()
+    cursor_sprite.x = x
+    cursor_sprite.y = y
+
+
 # Make background
 global background_sprite
-background = pyglet.resource.image('battleback4.png')
+background = pyglet.resource.image('battleback1.png')
 background.width = 1200
 background.height = 900
 background_sprite = pyglet.sprite.Sprite(img=background, x=0, y=0)
@@ -51,6 +61,7 @@ def moveCharacter(dt):
     if pyglet.window.key.DOWN in pressing_keys:
         player.move(0, -character_speed)
 
+
 @window.event
 def on_draw():
     window.clear()
@@ -59,6 +70,7 @@ def on_draw():
     for cowboy in cowboys:
         cowboy.draw()
     timer.label.draw()
+    cursor_sprite.draw()
 
 
 @window.event
@@ -78,6 +90,8 @@ def on_key_press(symbol, modifiers):
 def on_key_release(symbol, modifiers):
     pressing_keys.remove(symbol)
 
+nhac_nen = pyglet.media.load("/tmp/guest-t3sj3t/nson/step_00/resources/nhacnen.wav")
+nhac_nen.play()
 
 def update(dt):
     player.update(dt)
