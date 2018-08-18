@@ -3,7 +3,7 @@ import pyglet
 from random import randint
 
 class Cowboy:
-    def __init__(self, image=None):
+    def __init__(self, batch, image):
         self.posx = randint(0, 1200)
         self.posy = randint(450, 950)
         self.velx = 0
@@ -12,7 +12,11 @@ class Cowboy:
             cowboy = pyglet.resource.image(image)
             cowboy_seq = pyglet.image.ImageGrid(cowboy, 4 ,8 ,item_width = 45, item_height = 45)
             cowboy_animation = pyglet.image.Animation.from_image_sequence(cowboy_seq[10:20], 0.1, loop=True)
-            self.cowboy_sprite = pyglet.sprite.Sprite(cowboy_animation, x=self.posx, y=self.posy)
+            self.cowboy_sprite = pyglet.sprite.Sprite(cowboy_animation, x=self.posx, y=self.posy, batch=batch)
+
+            self.cowboy_sprite.image.anchor_x = 45 / 2
+            self.cowboy_sprite.image.anchor_y = 45 / 2
+            self.cowboy_sprite.rotation = 0
 
 
     def draw(self):
@@ -20,7 +24,6 @@ class Cowboy:
 
 
     def update(self, dt, pos):
-        print(pos)
         if self.cowboy_sprite.x <= pos[0] and self.cowboy_sprite.y < pos[1]:
             self.cowboy_sprite.x += 50*dt
             self.cowboy_sprite.y += 50*dt
@@ -33,6 +36,8 @@ class Cowboy:
         else:
             self.cowboy_sprite.x -= 50*dt
             self.cowboy_sprite.y += 50*dt
+
+
 
 
 class Witch(object):

@@ -46,19 +46,12 @@ def on_draw():
 
 
 @window.event
-def on_mouse_motion(x, y, dx, dy):
-    mouse_pos = x, y
-
-
-@window.event
 def on_mouse_press(x, y, button, modifier):
-    happy_tree_friends = [[100, 300], [400, 300], [700,300]]
-    for cay in range(len(happy_tree_friends)):
+    for cay in sprites:
         if button == mouse.LEFT:
-            if hit(x, y, happy_tree_friends[cay][0],  happy_tree_friends[cay][1]) is True:
-                sprites.remove(sprites[cay])
-            else:
-                return False
+            if hit(x, y, cay.x, cay.y) is True:
+                sprites.remove(cay)
+                break
 
 
 def game_loop(_):

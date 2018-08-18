@@ -23,3 +23,9 @@ class PlayerObject:
         pos[0] = self.sprite.x
         pos[1] = self.sprite.y
         return pos
+
+    def move(self, x, y):
+        if ((self.sprite.x <= 0.0 and x < 0) or (self.sprite.x >= 1200 - 25 and x > 0) or (self.sprite.y <= 0 and y < 0) or (self.sprite.y >= 900-35 and y > 0)):
+            return
+        self.sprite.x += x
+        self.sprite.y += y
