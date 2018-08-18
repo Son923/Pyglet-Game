@@ -16,19 +16,49 @@ def make_background():
 
 make_background()
 
+class Timer:
+    def __init__(self):
+        self.label = pyglet.text.Label('00:00', font_size=30, x=1070, y=850)
+        self.reset()
+
+    def reset(self):
+        self.time = 0
+        self.running = True
+        self.label.text = '00:00'
+        self.label.color = (255, 255, 255, 255)
+
+    def update(self, dt):
+        if self.running:
+            self.time += dt
+            m, s = divmod(self.time, 60)
+            self.label.text = '%02d:%02d' % (m, s)
+            if m >= 5:
+                self.label.color = (180, 0, 0, 255)
+        else:
+            self.label = pyglet.text.Label(self.label.text, font_size=300,
+                                           x=window.width // 2,
+                                           y=window.height // 2,
+                                           anchor_x='center', anchor_y='center')
+
+
+
 @window.event
 def on_draw():
     window.clear()
     background_sprite.draw()
-    new_monster = group_monsters(100)
+
+
+    new_monster = group_monsters(10)
     for monster in new_monster:
         monsters_group.append(monster)
     # monsters_group = (group_monsters(2))
-    print(monsters_group)
+    # print(monsters_group)
     for monster in monsters_group:
         monster.draw()
-# def begin_value():
-
+    # Draw the clock
+    if len(monsters_group) == 100:
+        timer.running = False
+    timer.label.draw()
 
 def group_monsters(num_monsters):
     # Make monsteres
@@ -38,7 +68,7 @@ def group_monsters(num_monsters):
     monster_position = []
     for i in range(num_monsters):
         monster_x = random.randint(0, 1200)
-        monster_y = random.randint(450, 900)
+        monster_y = random.randint(0, 900)
         monster_position.append([monster_x, monster_y])
         # Make one monster
         monster = pyglet.resource.image('pipo-enemy007.png')
@@ -58,5 +88,7 @@ def update(dt):
 # pyglet.app.run()
 
 if __name__ == "__main__":
+    timer = Timer()
     pyglet.clock.schedule_interval(update, 1.0)
+    pyglet.clock.schedule_interval(timer.update, 1.0)
     pyglet.app.run()
