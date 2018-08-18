@@ -3,6 +3,7 @@ import pyglet
 from GameObjects import PlayerObject
 from MinionObjects import Cowboy, Witch
 from pyglet.window import key
+import Time
 
 
 window = pyglet.window.Window(width=1200, height=900, caption="Space Invaders", resizable=False)
@@ -21,34 +22,44 @@ player = PlayerObject(600, 0, "Cowboy2_idle with gun_0.png")
 
 global monster_position
 monster_position = []
+monsters = []
+number = 2
 
+@window.event
+def on_key_press(symbol, modifiers):
+    if symbol == pyglet.window.key.SPACE:
+        if timer.running:
+            timer.running = False
+        else:
+            if timer.time > 0:
+                timer.reset()
+            else:
+                timer.running = True
+    elif symbol == pyglet.window.key.ESCAPE:
+        window.close()
 
-def spawn():
-    monsters = []
+def spawn(dt):
     # global monsters_group
-    for i in range(1):
+    global number
+    for i in range(number):
         cowboy = Cowboy("Cowboy2.png")
         monsters.append(cowboy)
-    return monsters
+    number += 1
 
 # cowboy = Cowboy("Cowboy2.png")
-# cowboy2 = Cowboy("Cowboy2.png")
+# cowboy2 = Cowboy("Cowboy2.png")global time
 # cowboy3 = Cowboy("Cowboy2.png")
 # witch1 = Witch(100, 20, "sorcerer villain.png")
 
-monsters = []
 
 @window.event
 def on_draw():
     window.clear()
     background_sprite.draw()
     player.sprite.draw()
-    new = spawn()
-    for i in new:
-        monsters.append(i)
-    for i in monsters:
-        i.draw()
-
+    for enemy in monsters:
+        enemy.draw()
+    timer.label.draw()
     # cowboy.draw()
     # cowboy2.draw()
     # cowboy3.draw()
@@ -56,16 +67,17 @@ def on_draw():
     # self.blob_sprite.Sprite(blob_animation, x=400, y=400).draw()
 
 
+
 @window.event
 def on_text_motion(motion):
     if motion == pyglet.window.key.MOTION_LEFT:
-        player.sprite.x -= 10
+        player.sprite.x -= 20
     if motion == pyglet.window.key.MOTION_RIGHT:
-        player.sprite.x += 10
+        player.sprite.x += 20
     if motion == pyglet.window.key.MOTION_UP:
-        player.sprite.y += 10
+        player.sprite.y += 20
     if motion == pyglet.window.key.MOTION_DOWN:
-        player.sprite.y -= 10
+        player.sprite.y -= 20
 
 
 def update(dt):
@@ -79,5 +91,8 @@ def update(dt):
     on_draw()
 
 if __name__ == "__main__":
+    timer = Timer()
     pyglet.clock.schedule_interval(update, 1.0/60)
+    pyglet.clock.schedule_interval(spawn, 5)
+    pyglet.clock.schedule_interval(timer.update, 1.0)
     pyglet.app.run()
